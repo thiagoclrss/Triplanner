@@ -4,14 +4,9 @@ Este projeto é um protótipo de sistema para planejamento de viagens otimizadas
 
 ## 🛠️ Tecnologias Utilizadas
 
-* **Backend/Algoritmo:** Python
-* **Framework Web:** Django
-* **Frontend:** HTML5 e Bootstrap 5
-
-## ⚙️ Pré-requisitos
-
-Para rodar este projeto, você precisará ter instalado em sua máquina:
-* [Python 3.x](https://www.python.org/downloads/)
+* **Backend/Algoritmo:** [Python 3.14](https://www.python.org/downloads/)
+* **Framework Web:** [Django](https://docs.djangoproject.com/pt-br/6.0/) + [django_bootstrap](https://django-bootstrap5.readthedocs.io/en/latest/)
+* **Frontend:** HTML5 e [Bootstrap 5](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 
 ## 🚀 Como executar o projeto localmente
 
@@ -22,7 +17,6 @@ Abra o seu terminal e navegue até a pasta raiz do projeto onde está o arquivo 
 ```bash
 cd caminho/para/o/projeto/triplanner
 ```
-
 
 ### 2. Criar o Ambiente Virtual (venv)
 O ambiente virtual isola as dependências do projeto para não conflitar com outras bibliotecas do seu sistema operacional.
@@ -47,11 +41,13 @@ venv\Scripts\activate
 (Quando o ambiente estiver ativo, você verá o prefixo (venv) no seu terminal).
 
 ### 4. Instalar as Dependências
-Com o ambiente ativado, instale o Django (a única dependência externa deste protótipo):
+Com o ambiente ativado, instale as dependências:
 
 ```bash
-pip install django
+pip install -r requirements.txt
 ```
+
+> Após instalar/remover uma dependência, execute `pip freeze > requirements.txt` para recriar o arquivo de _requirements_ atualizado.
 
 ### 5. Executar as Migrações do Django
 Para preparar o banco de dados padrão do Django (SQLite) e evitar avisos de erro no terminal:
