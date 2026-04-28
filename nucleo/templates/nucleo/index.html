@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planejador de Viagens (Heurística)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">Planejador de Viagem Multicritério ✈️</h2>
+            
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="origem" class="form-label">Cidade de Origem</label>
+                                <select class="form-select" id="origem" name="origem" required>
+                                    {% for cidade in cidades_disponiveis %}
+                                        <option value="{{ cidade }}" {% if dados_form.origem == cidade %}selected{% endif %}>{{ cidade }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="tempo_maximo" class="form-label">Tempo Máximo (Horas)</label>
+                                <input type="number" class="form-control" id="tempo_maximo" name="tempo_maximo" value="{{ dados_form.tempo_maximo|default:40 }}" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="orcamento_maximo" class="form-label">Orçamento (R$)</label>
+                                <input type="number" step="0.01" class="form-control" id="orcamento_maximo" name="orcamento_maximo" value="{{ dados_form.orcamento_maximo|default:1000 }}" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Gerar Rota Otimizada</button>
+                    </form>
+                </div>
+            </div>
+
+            {% if resultado %}
+            <div class="card shadow-sm border-success">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Resultado do Algoritmo</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Rota Recomendada:</strong> 
+                        {% for cidade in resultado.rota %}
+                            <span class="badge bg-primary">{{ cidade }}</span> {% if not forloop.last %} ➔ {% endif %}
+                        {% endfor %}
+                    </p>
+                    
+                    <ul class="list-group mb-3">
+                        {% for detalhe in resultado.detalhes %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Da {{ detalhe.de }} para {{ detalhe.para }}
+                                <span>
+                                    <span class="badge bg-secondary rounded-pill me-2">⏳ {{ detalhe.tempo }}h</span>
+                                    <span class="badge bg-success rounded-pill">💰 R$ {{ detalhe.custo }}</span>
+                                </span>
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item text-muted">Nenhuma viagem possível com essas restrições.</li>
+                        {% endfor %}
+                    </ul>
+
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <strong>Custo Total:</strong><br> R$ {{ resultado.custo_total|floatformat:2 }}
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Tempo Total:</strong><br> {{ resultado.tempo_total }}h
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Satisfação (Pontos):</strong><br> {{ resultado.satisfacao_total }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
