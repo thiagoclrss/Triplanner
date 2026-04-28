@@ -1,6 +1,6 @@
 # Planejador de Viagem Multicritério ✈️
 
-Este projeto é um protótipo de sistema para planejamento de viagens otimizadas, desenvolvido como trabalho acadêmico (Tema 7). A aplicação modela cidades como um grafo e utiliza uma busca heurística (Algoritmo Guloso) para maximizar a satisfação do turista, respeitando restrições de orçamento financeiro e tempo de viagem.
+Este projeto é um protótipo de sistema para planejamento de viagens otimizadas. A aplicação modela cidades como um grafo e utiliza uma busca heurística para maximizar a satisfação do turista, respeitando restrições de orçamento financeiro e tempo de viagem.
 
 ## 🛠️ Tecnologias Utilizadas
 
