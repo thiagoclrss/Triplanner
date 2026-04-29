@@ -1,0 +1,20 @@
+{% extends "django_bootstrap5/bootstrap5.html" %}
+{% load django_bootstrap5 %}
+
+{% block bootstrap5_title %}Planejador de Viagens (Heurística){% endblock bootstrap5_title %}
+
+{% block bootstrap5_before_content %}
+{% bootstrap_messages %}
+{% endblock %}
+
+{% block bootstrap5_content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            {% block content %}Página vazia{% endblock content %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block bootstrap5_after_content %}{% endblock %}

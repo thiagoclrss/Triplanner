@@ -1,0 +1,39 @@
+<div class="card shadow-sm border-success">
+    <div class="card-header bg-success text-white">
+        <h5 class="mb-0">Resultado do Algoritmo</h5>
+    </div>
+
+    <div class="card-body">
+        <p><strong>Rota Recomendada:</strong> 
+            {% for cidade in resultado.rota %}
+                <span class="badge bg-primary">{{ cidade }}</span> {% if not forloop.last %} ➔ {% endif %}
+            {% endfor %}
+        </p>
+
+        <ul class="list-group mb-3">
+            {% for detalhe in resultado.detalhes %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Da {{ detalhe.de }} para {{ detalhe.para }}
+                    <span>
+                        <span class="badge bg-secondary rounded-pill me-2">⏳ {{ detalhe.tempo }}h</span>
+                        <span class="badge bg-success rounded-pill">💰 R$ {{ detalhe.custo }}</span>
+                    </span>
+                </li>
+            {% empty %}
+                <li class="list-group-item text-muted">Nenhuma viagem possível com essas restrições.</li>
+            {% endfor %}
+        </ul>
+
+        <div class="row text-center">
+            <div class="col-md-4">
+                <strong>Custo Total:</strong><br> R$ {{ resultado.custo_total|floatformat:2 }}
+            </div>
+            <div class="col-md-4">
+                <strong>Tempo Total:</strong><br> {{ resultado.tempo_total }}h
+            </div>
+            <div class="col-md-4">
+                <strong>Satisfação (Pontos):</strong><br> {{ resultado.satisfacao_total }}
+            </div>
+        </div>
+    </div>
+</div>

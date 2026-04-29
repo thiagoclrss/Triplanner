@@ -1,0 +1,8 @@
+{% load django_bootstrap5 %}
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="row mb-3">{% bootstrap_form form %}</div>
+
+    {% bootstrap_button button_type="submit" content=submit_button_content|default:"Confirmar" extra_classes="w-100" %}
+</form>
