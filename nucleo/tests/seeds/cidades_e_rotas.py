@@ -1,4 +1,3 @@
-from datetime import timedelta
 from pprint import pprint
 from typing import Iterable
 
@@ -28,7 +27,7 @@ def create_routes_if_empty(
             created_routes = Route.objects.bulk_create([
                 Route(
                     src=city_instance, dest=created_map[dest],
-                    cost=attrs['custo'], time=timedelta(hours=attrs['tempo'])
+                    cost=attrs['custo'], time=attrs['tempo'],
                 )
                 for dest, attrs in routes[cidade].items()
             ])
