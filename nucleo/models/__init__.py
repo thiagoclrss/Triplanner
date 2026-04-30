@@ -1,8 +1,10 @@
 # Register your models here.
 from django.db import models
 
+from .mixins import CidadeMixin, RotasMixin
 
-class City(models.Model):
+
+class City(models.Model, CidadeMixin):
     slug = models.SlugField(
         primary_key=True, max_length=255, null=False, blank=False,
         help_text='Nome limpo para urls e paths',
@@ -30,7 +32,7 @@ class City(models.Model):
         verbose_name_plural = 'Cidades'
 
 
-class Route(models.Model):
+class Route(models.Model, RotasMixin):
     src = models.ForeignKey(
         City, verbose_name='origem', on_delete=models.CASCADE,
         related_name='+',
@@ -44,7 +46,7 @@ class Route(models.Model):
         verbose_name='custo', max_digits=_NUMERO_DIGITOS_BILHAO, decimal_places=2, null=False, blank=False,
         help_text='custo (em R$) para ir de origem a destino',
     )
-    time = models.DurationField(
+    time = models.PositiveIntegerField(
         verbose_name='tempo', null=False, blank=False,
         help_text='Tempo (em Horas) de viagem de origem a destino',
     )
