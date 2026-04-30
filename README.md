@@ -55,6 +55,16 @@ Para preparar o banco de dados padrão do Django (SQLite) e evitar avisos de err
 ```bash
 python manage.py migrate
 ```
+
+Para adicionar alguns dados de teste/desenvolvimento, abra o shell e execute os comandos de forma interativa:
+```python
+# python manage.py shell
+# para entrar no shell interativo
+>>> from nucleo.tests.seeds.cidades_e_rotas import populate_db
+>>> populate_db()
+>>> quit()
+```
+
 ### 6. Iniciar o Servidor de Desenvolvimento
 
 ```bash
