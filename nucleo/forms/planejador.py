@@ -1,14 +1,20 @@
 from django import forms
 
-from ..algorithm import CIDADES
+from ..algoritmos import ALGORITMOS_CHOICES
+from ..models import City
 
 
 def _get_choices_cidades() -> list[tuple[str, str]]:
     # (key para o select, label para o usuário)
-    return [(cidade, cidade) for cidade in CIDADES.keys()]
+    return [(cidade.slug, cidade.name) for cidade in City.objects.all()]
 
 
 class PlanejadorForm(forms.Form):
+    algoritmo = forms.ChoiceField(
+        choices=ALGORITMOS_CHOICES,
+        label='Perfil de priorização',
+        help_text='Define qual atributo será priorizado na estratégia'
+    )
     origem = forms.ChoiceField(
         choices=_get_choices_cidades,
         label='Cidade de Origem'
