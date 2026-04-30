@@ -6,6 +6,7 @@ Este projeto é um protótipo de sistema para planejamento de viagens otimizadas
 
 * **Backend/Algoritmo:** [Python 3.14](https://www.python.org/downloads/)
 * **Framework Web:** [Django](https://docs.djangoproject.com/pt-br/6.0/) + [django_bootstrap](https://django-bootstrap5.readthedocs.io/en/latest/)
+* **Testes:** [Pytest](https://docs.pytest.org/en/9.0.x/)
 * **Frontend:** HTML5 e [Bootstrap 5](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 
 ## 🚀 Como executar o projeto localmente
@@ -73,3 +74,9 @@ python manage.py runserver
 ### 7. Acessar a Aplicação
 Abra o seu navegador web e acesse o endereço fornecido pelo terminal, geralmente:
 👉 http://127.0.0.1:8000
+
+### 8. Testes
+
+Para executar os testes, basta utilizar o comando `pytest` e para gerar o relatório de cobertura é só adicionar a flag `--cov` que será automaticamente gerado (configurações já fixadas em pytest.ini).
+
+> Também deve ser possível ver os testes e cobertura pelo painel do VS Code.
