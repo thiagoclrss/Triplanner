@@ -2,14 +2,19 @@ from .interfaces import BaseAlgoritmo, ICidade, Resposta
 
 
 class AlgoritmoGuloso(BaseAlgoritmo):
-    def __init__(self) -> None:
-        self.peso_importancia = 1.0
-        self.peso_custo = 0.01  
-        self.peso_tempo = 0.5
+    def __init__(
+            self,
+            importancia = 1.0,
+            custo = 0.01,
+            tempo = 0.5,
+        ) -> None:
+        self.peso_importancia = importancia
+        self.peso_custo = custo
+        self.peso_tempo = tempo
 
     def __str__(self) -> str:
         return 'Importância'
-    
+
     def description(self) -> str:
         return ('Perfil que considera mais a importância da cidade')
 
@@ -41,7 +46,7 @@ class AlgoritmoGuloso(BaseAlgoritmo):
                 if vizinho not in visitadas:
                     custo = rota.custo
                     tempo = rota.tempo
-                    importancia = cidade_atual.importancia
+                    importancia = vizinho.importancia
 
                     if (dinheiro_gasto + custo <= orcamento_maximo) and (tempo_gasto + tempo <= tempo_maximo):
                         utilidade = self.utilidade(importancia, custo, tempo)
@@ -54,13 +59,10 @@ class AlgoritmoGuloso(BaseAlgoritmo):
             if melhor_proxima is None:
                 break
 
-            # assert melhor_rota is not None
-
             visitadas.append(melhor_proxima)
             tempo_gasto += melhor_rota.tempo
             dinheiro_gasto += melhor_rota.custo
             satisfacao_total += melhor_proxima.importancia
-
             detalhes_viagem.append(melhor_rota)
 
             cidade_atual = melhor_proxima

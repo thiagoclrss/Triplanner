@@ -15,6 +15,9 @@ class ICidade:
     def __str__(self) -> str: raise NotImplementedError()
 
     @property
+    def nome(self) -> str: raise NotImplementedError()
+
+    @property
     def importancia(self) -> int: raise NotImplementedError()
 
     @property

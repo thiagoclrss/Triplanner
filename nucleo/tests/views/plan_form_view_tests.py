@@ -1,5 +1,3 @@
-
-
 from nucleo.views import PlanFormView
 
 
