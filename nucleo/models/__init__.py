@@ -23,6 +23,9 @@ class City(models.Model, CidadeMixin):
         'self', through='nucleo.Route', through_fields=('src', 'dest'),
         related_name='+', symmetrical=False,
     )
+    # Atributos de FK
+    # exit_routes: rotas que saem
+    # entry_routes: rotas que chegam
 
     def __str__(self) -> str:
         return self.name
@@ -35,11 +38,11 @@ class City(models.Model, CidadeMixin):
 class Route(models.Model, RotasMixin):
     src = models.ForeignKey(
         City, verbose_name='origem', on_delete=models.CASCADE,
-        related_name='+',
+        related_name='exit_routes',
     )
     dest = models.ForeignKey(
         City, verbose_name='destino', on_delete=models.CASCADE,
-        related_name='rotas',
+        related_name='entry_routes',
     )
     _NUMERO_DIGITOS_BILHAO = 12
     cost = models.DecimalField(

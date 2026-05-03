@@ -5,12 +5,16 @@ from ..algoritmos.interfaces import ICidade, IRotas
 
 class CidadeMixin(ICidade):
     @property
+    def nome(self) -> str:
+        return self.name
+
+    @property
     def importancia(self) -> int:
         return self.importance
 
     @property
     def vizinhos(self) -> Iterable[IRotas]:
-        return self.routes.through.objects.all()
+        return self.exit_routes.prefetch_related('dest').all()
 
 
 class RotasMixin(IRotas):
