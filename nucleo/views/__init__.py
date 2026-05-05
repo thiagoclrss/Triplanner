@@ -5,6 +5,7 @@ from ..algoritmos import ALGORITMOS_CHOICES
 from ..forms.planejador import PlanejadorForm
 from ..models import City
 from .city_list_view import CityListView
+from .plan_with_weights_view import PlanWithWeightsFormView
 
 
 class PlanFormView(FormView):
@@ -14,8 +15,8 @@ class PlanFormView(FormView):
     def form_valid(self, form: PlanejadorForm):
         algoritmo_choice = form.cleaned_data.get('algoritmo')
         origem = form.cleaned_data.get('origem')
-        tempo_maximo = form.cleaned_data.get('tempo_maximo')
-        orcamento_maximo = form.cleaned_data.get('orcamento_maximo')
+        tempo_maximo = form.cleaned_data.get('tempo_maximo', 0)
+        orcamento_maximo = form.cleaned_data.get('orcamento_maximo', 0)
 
         cidade = get_object_or_404(City, slug=origem)
         algoritmo = ALGORITMOS_CHOICES[algoritmo_choice]
